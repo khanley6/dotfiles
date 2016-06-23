@@ -7,7 +7,8 @@
 " Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'davinche/godown-vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'vivien/vim-linux-coding-style'

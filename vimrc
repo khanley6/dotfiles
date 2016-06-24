@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-journal'
 Plug 'davinche/godown-vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'vivien/vim-linux-coding-style'
@@ -212,6 +214,9 @@ set foldtext=MyFoldText()
 
 	" This is probably a mistake... But it works to open function definition in a split
 	autocmd filetype go map <leader>d : GoDef<CR>
+	"}}}
+	" vim-journal {{{
+	au BufNewFile,BufRead *.vj set filetype=journal
 	"}}}
 	" Python {{{
 	au BufNewFile,BufRead *.py set filetype=python

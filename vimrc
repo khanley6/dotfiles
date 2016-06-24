@@ -282,7 +282,8 @@ nnoremap <leader>ei :tabnew ~/.i3/config<cr>
 "}}}
 " Formatting {{{
 "Settings for LinuxFormatting"
-nnoremap <silent> <leader>k :SetLinuxFormatting<cr><cr>
+nnoremap <silent> <leader>k :LinuxCodingStyle<cr>
+let g:linuxsty_patterns = [ "/linux/", "/Linux/", "/kernel/", "/Kernel/" ]
 "}}}
 " Environment {{{
 if &diff

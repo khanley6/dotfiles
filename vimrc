@@ -216,7 +216,7 @@ set foldtext=MyFoldText()
 	autocmd filetype go map <leader>d : GoDef<CR>
 	"}}}
 	" vim-journal {{{
-	au BufNewFile,BufRead *.vj set filetype=journal
+	"au BufNewFile,BufRead *.vj set filetype=journal
 	"}}}
 	" Python {{{
 	au BufNewFile,BufRead *.py set filetype=python

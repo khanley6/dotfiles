@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'davinche/godown-vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'vivien/vim-linux-coding-style'
@@ -293,9 +294,9 @@ endif
 	"Setings for ctags"
 	map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 	"}}}
-	" CtrlP {{{
-	let g:ctrlp_map = '<c-p>'
-	let g:ctrlp_cmd = 'CtrlP'
+	" fzf.vim {{{
+	nnoremap <silent> <C-p> :Files<CR>
+	nnoremap <silent> <C-o> :Lines<CR>
 	"}}}
 	" Jedi-vim {{{
 	" open definitions in tabs

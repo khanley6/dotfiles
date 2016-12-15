@@ -257,12 +257,10 @@ alias sl='ls'
 alias rr='ranger'
 alias cd..='cd ..'
 
-#alias connectCollegeVPN='nmcli con up id College'
-#alias disconnectCollegeVPN='nmcli con down id College'
-function connectCollegeVPN { 
-	sudo openconnect https://dora.nuigalway.ie
-}
+alias connectCollegeVPN='nmcli con up id College'
+alias disconnectCollegeVPN='nmcli con down id College'
 
+alias pingg='ping 8.8.8.8'
 alias wifiOn='rfkill unblock wifi'
 alias wifiOff='rfkill block wifi'
 # Not worth movinf to function section
@@ -326,12 +324,19 @@ export GOPATH=/home/kenneth/Documents/Go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/home/kenneth/bin
 
+# Google appengine
+export PATH=$PATH:/home/kenneth/Documents/AppEngine/go_appengine
+
 #Ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+#Cuda
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 #}}}
 # Source Scripts {{{
 # FZF

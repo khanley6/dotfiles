@@ -33,6 +33,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-surround'
+Plug 'xolox/vim-notes'
 
 call plug#end()
 "}}}
@@ -213,7 +214,7 @@ set foldtext=MyFoldText()
 	au BufNewFile *.go 0r ~/.vim/skel/go.skel
 
 	" This is probably a mistake... But it works to open function definition in a split
-	autocmd filetype go map <leader>d : GoDef<CR>
+	au FileType go nmap <Leader>d <Plug>(go-def-split)
 	"}}}
 	" vim-journal {{{
 	"au BufNewFile,BufRead *.vj set filetype=journal
@@ -268,6 +269,9 @@ nnoremap <leader>ei :tabnew ~/.i3/config<cr>
 
 	" Paste from clilpboard
 	nnoremap <leader>p :r !xsel -bp<cr>
+
+	" Wrap text to split
+	nnoremap <leader>wr :set wrap linebreak nolist
 	" Insert Mode Completion {{{
 
 	inoremap <c-f> <c-x><c-f>
@@ -351,6 +355,9 @@ endif
 	let g:multi_cursor_next_key='<C-m>'
 	let g:multi_cursor_quit_key='<Esc>'
 
+	"}}}
+	" Vim-Notes {{{
+	let g:notes_directories = ['~/Dropbox/Notes']
 	"}}}
 "}}}
 " Mini-plugins {{{

@@ -203,13 +203,20 @@ jobscount() {
     local running=$(jobs -rp | wc -l)
     if [ "$((stopped+running))" -gt 0 ];
     then
-        echo -n " [$running|$stopped]:"
+        echo -n " [$running|$stopped]"
     else
-        echo -n ":"
+        echo -n ""
     fi
 }
 
-
+subsh() {
+	if [ $SHLVL -ge 3 ];
+	then
+		echo -n " [rr]"
+	else
+		echo -n ""
+	fi
+}
 
 # PS1 include git status, job count and colour
 if [ $(id -u) -eq 0 ];
@@ -229,7 +236,7 @@ else \
   echo "'$Red$PathShort$Red' \\$ '$Color_Off'"; \
 fi)'
 else
-export PS1=$Green$UserAt'$(jobscount)'$Color_Off'$(git branch &>/dev/null;\
+export PS1=$Green$UserAt'$(jobscount)'$Yellow'$(subsh)'$Green:$Color_Off'$(git branch &>/dev/null;\
 if [ $? -eq 0 ]; then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
@@ -251,7 +258,7 @@ alias fuck='sudo $(history -p \!\!)'
 alias local-server='python -m SimpleHTTPServer'
 alias jabref='java -jar /home/kenneth/Software/JabRef/JabRef-2.9.2.jar &'
 alias nnautilus='nautilus --no-desktop &'
-alias yor='rlwrap -c ~/y0rick/relocate/bin/yorick'
+alias yor='rlwrap -c ~/Documents/phd/relocate/bin/yorick'
 alias terminator-college='terminator -p remotehost'
 alias sl='ls'
 alias rr='ranger'
@@ -278,6 +285,10 @@ alias midClick='synclient ClickFinger3=2'
 # Look busy
 alias busy="cat /dev/urandom | hexdump -C | grep \"ca fe\"" 
 
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+
+alias settings="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+
 	# Git Aliases {{{
 	alias gclone="git clone"
 	#}}}
@@ -294,12 +305,6 @@ Countdown() {
     egrep "^[$1]{$2}$" /usr/share/dict/words | egrep -v "(.).*\1"
 }
 
-# Turn on nas at home
-nasOn() {
-    wakeonlan 00:1B:38:A8:6F:19
-    nc -l 10103
-}
-
 # mkdir && cd
 mkcd() {
     mkdir "$1"
@@ -312,35 +317,57 @@ cvim() {
 }
 
 bkp() { cp "$1"{,.bak};}
+
+youtube_mp3() {
+	youtube-dl --extract-audio --audio-format mp3 "$1"
+}
+
+codi() {
+  local syntax="${1:-python}"
+  shift
+  vim -c \
+    "let g:startify_disable_at_vimenter = 1 |\
+    set bt=nofile ls=0 noru nonu nornu |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+    Codi $syntax | set bt=nofile" "$@"
+}
 #}}}
 # Path {{{
 # Intel compilers
 #source /opt/intel/composer_xe_2015/bin/compilervars.sh intel64
-source /opt/intel/parallel_studio_xe_2016.3.067/psxevars.sh intel64 > /dev/null
+#source /opt/intel/parallel_studio_xe_2016.3.067/psxevars.sh intel64 > /dev/null
 
 # Go
-export PATH=/usr/local/go/bin:$PATH
-export GOPATH=/home/kenneth/Documents/Go
+#export PATH=/usr/local/go/bin:$PATH
+export GOPATH=/home/kenneth/Documents/go
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/home/kenneth/bin
+#export PATH=$PATH:/home/kenneth/bin
 
 # Google appengine
-export PATH=$PATH:/home/kenneth/Documents/AppEngine/go_appengine
+#export PATH=$PATH:/home/kenneth/Documents/AppEngine/go_appengine
 
 #Ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 #Cuda
-export PATH=$PATH:/usr/local/cuda/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+#export PATH=$PATH:/usr/local/cuda/bin
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+
+# Jupyter
+export PATH=$PATH:~/.local/bin
+
+# Julia
+export PATH=$PATH:/home/kenneth/Documents/julia/julia-1.0.0/bin
 #}}}
 # Source Scripts {{{
 # FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-. /home/kenneth/torch/install/bin/torch-activate
+#. /home/kenneth/torch/install/bin/torch-activate
 #}}}

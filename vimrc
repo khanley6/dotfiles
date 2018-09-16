@@ -34,6 +34,10 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-surround'
 Plug 'xolox/vim-notes'
+Plug 'heavenshell/vim-pydocstring'
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'metakirby5/codi.vim'
 
 call plug#end()
 "}}}
@@ -161,8 +165,16 @@ cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
 " Insert line above/below without insert mode
-nnoremap <C-J> mao<Esc>`a
-nnoremap <C-K> maO<Esc>`a
+"nnoremap <C-J> mao<Esc>`a
+"nnoremap <C-K> maO<Esc>`a
+
+nnoremap <PageUp> <Nop>
+nnoremap <PageDown> <Nop>
+
+inoremap <PageUp> <Nop>
+inoremap <PageDown> <Nop>
+vnoremap <PageUp> <Nop>
+vnoremap <PageDown> <Nop>
 "}}}
 " Folding {{{
 set foldlevelstart=0
@@ -211,17 +223,20 @@ set foldtext=MyFoldText()
 	autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
 	"}}}
 	" Go {{{
-	au BufNewFile *.go 0r ~/.vim/skel/go.skel
+	"au BufNewFile *.go 0r ~/.vim/skel/go.skel
 
 	" This is probably a mistake... But it works to open function definition in a split
 	au FileType go nmap <Leader>d <Plug>(go-def-split)
+	"}}}
+	" HTML {{{
+	au BufNewFile,BufRead *.handlebars set filetype=html
 	"}}}
 	" vim-journal {{{
 	"au BufNewFile,BufRead *.vj set filetype=journal
 	"}}}
 	" Python {{{
 	au BufNewFile,BufRead *.py set filetype=python
-	au BufNewFile *.py 0r ~/.vim/skel/py.skel
+	"au BufNewFile *.py 0r ~/.vim/skel/py.skel
 	au FileType python setl foldmethod=indent foldlevel=99
 	
 	"}}}
@@ -332,12 +347,12 @@ endif
 	" Vim-Clang {{{
 	
 	let g:clang_c_options = '-std=gnu11'
-	let g:clang_cpp_options = '-std=c++11'
+	let g:clang_cpp_options = '-std=c++14'
 	
 	"}}}
 	" Vim-Dutyl {{{
 
-	let g:dutyl_stdImportPaths=['/usr/include/dmd/phobos', '/usr/include/dmd/druntime/import']
+	let g:dutyl_stdImportPaths=['/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/phobos', '/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/druntime/import']
 
 	"}}}
 	" Vim-Easy-Align {{{

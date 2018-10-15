@@ -25,3 +25,11 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+
+# zsh Notes
+### Install ###
+# sudo apt install zsh
+# chsh -s $(which zsh)
+# wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+## Update fzf maybe?

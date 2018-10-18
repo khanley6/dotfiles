@@ -249,6 +249,8 @@ set foldtext=MyFoldText()
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 nnoremap <leader>eb :tabnew ~/.bashrc<cr>
 nnoremap <leader>ei :tabnew ~/.i3/config<cr>
+nnoremap <leader>et :tabnew ~/.tmux.conf<cr>
+nnoremap <leader>ez :tabnew ~/.zshrc<cr>
 "}}}
 " Convenience {{{
 	" Tabs {{{

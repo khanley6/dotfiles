@@ -239,6 +239,9 @@ bar {
         
         # Using custom i3status.conf
         status_command i3status -c ~/.i3/i3status.conf 
+
+		bindsym button4 nop
+		bindsym button5 nop
 }
 
 new_window pixel 1

@@ -45,6 +45,7 @@ Plug 'airblade/vim-gitgutter'
 " sudo apt-get install build-essential python-dev cmake
 Plug 'Valloric/YouCompleteMe'
 Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'metakirby5/codi.vim'
 

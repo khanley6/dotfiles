@@ -21,7 +21,7 @@ Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'vim-scripts/taglist.vim'
 Plug 'jplaut/vim-arduino-ino'
-Plug 'justmao945/vim-clang'
+"Plug 'justmao945/vim-clang'
 Plug 'altercation/vim-colors-solarized'
 Plug 'idanarye/vim-dutyl'
 Plug 'junegunn/vim-easy-align'
@@ -37,6 +37,15 @@ Plug 'xolox/vim-notes'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'mhinz/vim-startify'
+" sudo apt-get install fonts-powerline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+" sudo apt-get install build-essential python-dev cmake
+Plug 'Valloric/YouCompleteMe'
+Plug 'edkolev/tmuxline.vim'
+
 Plug 'metakirby5/codi.vim'
 
 call plug#end()
@@ -46,6 +55,7 @@ filetype plugin indent on
 " This prevents comments being continued on a new line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
+set encoding=utf-8
 set autoindent
 set nu
 set cursorline
@@ -346,6 +356,10 @@ endif
 	"Settings for taglist"
 	nnoremap <silent> <leader>tt :Tlist<CR>
 	"}}}
+	" Vim-airline {{{
+	let g:airline_theme = "jellybeans"
+	let g:airline_powerline_fonts = 1
+	"}}}
 	" Vim-Clang {{{
 	
 	let g:clang_c_options = '-std=gnu11'
@@ -375,6 +389,9 @@ endif
 	"}}}
 	" Vim-Notes {{{
 	let g:notes_directories = ['~/Dropbox/Notes']
+	"}}}
+	" YouCompleteMe {{{
+	let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 	"}}}
 "}}}
 " Mini-plugins {{{

@@ -1,6 +1,6 @@
 " .vimrc
 " Author: Kenneth Hanley <kennethhanley@gmail.com>
-" 
+"
 " A lot of this file has been copied from
 " 		Steve Losh <steve@stevelosh.com>
 
@@ -74,60 +74,60 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0
 " Change default split placement
 set splitbelow
-	" Wildmenu {{{
-	set wildmenu
-	set wildignore+=.git 								"Version control
-	set wildignore+=*.aux,*.out,*.toc 					"Latex files
-	set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg 		" binary images
-	set wildignore+=*.o,*.obj,*.exe 					" compiled object files
-	set wildignore+=*.sw? 								" Vim swap files
-	set wildignore+=*.pyc 								" Python byte code
-	"}}}
-	" Line Return {{{
+" Wildmenu {{{
+set wildmenu
+set wildignore+=.git 								"Version control
+set wildignore+=*.aux,*.out,*.toc 					"Latex files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg 		" binary images
+set wildignore+=*.o,*.obj,*.exe 					" compiled object files
+set wildignore+=*.sw? 								" Vim swap files
+set wildignore+=*.pyc 								" Python byte code
+"}}}
+" Line Return {{{
 
-	" Make sure Vim returns to the same line when you reopen a file.
-	" Thanks, Amit
-	augroup line_return
-		au!
-		au BufReadPost *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\     execute 'normal! g`"zvzz' |
-			\ endif
-	augroup END
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Amit
+augroup line_return
+	au!
+	au BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\     execute 'normal! g`"zvzz' |
+				\ endif
+augroup END
 
-	" }}}
-	" Tabs, spaces, wrapping {{{
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
-	"set expandtab
-	"set wrap
-	"set textwidth=80
-	"set formatoptions=qrn1j
-	"set colorcolumn=+1
+" }}}
+" Tabs, spaces, wrapping {{{
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+"set expandtab
+"set wrap
+"set textwidth=80
+"set formatoptions=qrn1j
+"set colorcolumn=+1
 
-	" }}}
-	" Backups {{{
+" }}}
+" Backups {{{
 
-	set backup                        " enable backups
-	"set noswapfile                    " it's 2013, Vim.
+set backup                        " enable backups
+"set noswapfile                    " it's 2013, Vim.
 
-	set undodir=~/.vimtmp/undo//     " undo files
-	set backupdir=~/.vimtmp/backup// " backups
-	set directory=~/.vimtmp/swap//   " swap files
+set undodir=~/.vimtmp/undo//     " undo files
+set backupdir=~/.vimtmp/backup// " backups
+set directory=~/.vimtmp/swap//   " swap files
 
-	" Make those folders automatically if they don't already exist.
-	if !isdirectory(expand(&undodir))
-		call mkdir(expand(&undodir), "p")
-	endif
-	if !isdirectory(expand(&backupdir))
-		call mkdir(expand(&backupdir), "p")
-	endif
-	if !isdirectory(expand(&directory))
-		call mkdir(expand(&directory), "p")
-	endif
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+	call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+	call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+	call mkdir(expand(&directory), "p")
+endif
 
-	" }}}
+" }}}
 "}}}
 " Search and Movement {{{
 set scrolloff=5
@@ -143,14 +143,14 @@ set scrolloff=5
 " are.  <c-\> will also fold everything in the buffer and then unfold just
 " enough for you to see the destination line.
 function! JumpToTag()
-    execute "normal! \<c-]>mzzvzz15\<c-e>"
-    execute "keepjumps normal! `z"
-    Pulse
+	execute "normal! \<c-]>mzzvzz15\<c-e>"
+	execute "keepjumps normal! `z"
+	Pulse
 endfunction
 function! JumpToTagInSplit()
-    execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
-    execute "keepjumps normal! `z"
-    Pulse
+	execute "normal! \<c-w>v\<c-]>mzzMzvzz15\<c-e>"
+	execute "keepjumps normal! `z"
+	Pulse
 endfunction
 nnoremap <c-]> :silent! call JumpToTag()<cr>
 nnoremap <c-\> :silent! call JumpToTagInSplit()<cr>
@@ -203,57 +203,57 @@ endfunction
 set foldtext=MyFoldText()
 "}}}
 " Filetypes {{{
-	" Arduino {{{
-		autocmd BufRead,BufNewFile *.pde,*.ino set filetype=arduino
-		au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
-	"}}}
-	" Assembly {{{
-	au BufNewFile,BufRead *.asm set filetype=nasm
-	"}}}
-	" C {{{
-	au BufNewFile,BufRead *.i set filetype=c
-	au BufNewFile *.c 0r ~/.vim/skel/c.skel
-	
-	autocmd filetype c map <leader>d :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-	"}}}
-	" C++ {{{
-	au BufNewFile,BufRead *.h++ set filetype=cpp
-	au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
-	au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
+" Arduino {{{
+autocmd BufRead,BufNewFile *.pde,*.ino set filetype=arduino
+au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
+"}}}
+" Assembly {{{
+au BufNewFile,BufRead *.asm set filetype=nasm
+"}}}
+" C {{{
+au BufNewFile,BufRead *.i set filetype=c
+au BufNewFile *.c 0r ~/.vim/skel/c.skel
 
-	au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
-	"}}}
-	" D {{{
-	au BufNewFile *.d 0r ~/.vim/skel/d.skel
+autocmd filetype c map <leader>d :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"}}}
+" C++ {{{
+au BufNewFile,BufRead *.h++ set filetype=cpp
+au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
+au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
 
-	" This is probably a mistake... But it works to open function definition in a split
-	autocmd filetype d map <leader>d : DUsjump<CR>
-	"}}}
-	" Docs {{{
-	autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
-	"}}}
-	" Go {{{
-	"au BufNewFile *.go 0r ~/.vim/skel/go.skel
+au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
+"}}}
+" D {{{
+au BufNewFile *.d 0r ~/.vim/skel/d.skel
 
-	" This is probably a mistake... But it works to open function definition in a split
-	au FileType go nmap <Leader>d <Plug>(go-def-split)
-	"}}}
-	" HTML {{{
-	au BufNewFile,BufRead *.handlebars set filetype=html
-	"}}}
-	" vim-journal {{{
-	"au BufNewFile,BufRead *.vj set filetype=journal
-	"}}}
-	" Python {{{
-	au BufNewFile,BufRead *.py set filetype=python
-	"au BufNewFile *.py 0r ~/.vim/skel/py.skel
-	au FileType python setl foldmethod=indent foldlevel=99
-	
-	"}}}
-	" Yorick {{{
-	"}}}
-	" Text {{{
-	"}}}
+" This is probably a mistake... But it works to open function definition in a split
+autocmd filetype d map <leader>d : DUsjump<CR>
+"}}}
+" Docs {{{
+autocmd BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -tplain -o /dev/stdout
+"}}}
+" Go {{{
+"au BufNewFile *.go 0r ~/.vim/skel/go.skel
+
+" This is probably a mistake... But it works to open function definition in a split
+au FileType go nmap <Leader>d <Plug>(go-def-split)
+"}}}
+" HTML {{{
+au BufNewFile,BufRead *.handlebars set filetype=html
+"}}}
+" vim-journal {{{
+"au BufNewFile,BufRead *.vj set filetype=journal
+"}}}
+" Python {{{
+au BufNewFile,BufRead *.py set filetype=python
+"au BufNewFile *.py 0r ~/.vim/skel/py.skel
+au FileType python setl foldmethod=indent foldlevel=99
+
+"}}}
+" Yorick {{{
+"}}}
+" Text {{{
+"}}}
 "}}}
 " Quick Editing {{{
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
@@ -263,53 +263,53 @@ nnoremap <leader>et :tabnew ~/.tmux.conf<cr>
 nnoremap <leader>ez :tabnew ~/.zshrc<cr>
 "}}}
 " Convenience {{{
-	" Tabs {{{
-	"Setings for tabs"
-	nnoremap th  :tabfirst<CR>
-	nnoremap tj  :tabnext<CR>
-	nnoremap tk  :tabprev<CR>
-	nnoremap tl  :tablast<CR>
-	nnoremap tt  :tabnew<Space>
-	nnoremap tn  :tabnext<CR>
-	nnoremap tm  :tabm<Space>
-	nnoremap td  :tabclose<CR>
-	"}}}
-	" Shortcuts {{{
-	"Clear whitespace
-	nnoremap <leader>lwr  :%s/^\s\+
-	nnoremap <leader>twr mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+" Tabs {{{
+"Setings for tabs"
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabnew<Space>
+nnoremap tn  :tabnext<CR>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+"}}}
+" Shortcuts {{{
+"Clear whitespace
+nnoremap <leader>lwr  :%s/^\s\+
+nnoremap <leader>twr mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
-	"Add whitespace for daily programmer
-	nnoremap <leader>lwa :%s/^/    /g
+"Add whitespace for daily programmer
+nnoremap <leader>lwa :%s/^/    /g
 
-	"Split line
-	nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+"Split line
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-	"Sudo write - when you forget to sudo vim"
-	cnoremap sudow w !sudo tee % >/dev/null
+"Sudo write - when you forget to sudo vim"
+cnoremap sudow w !sudo tee % >/dev/null
 
-	"Moves char cursor to the end of line
-	nnoremap zl :let @z=@"<cr>x$p:let @"=@z<cr>
-	
-	"Add semicolon to the end of the line
-	nnoremap <leader>; meA;<Esc>`e
+"Moves char cursor to the end of line
+nnoremap zl :let @z=@"<cr>x$p:let @"=@z<cr>
 
-	" Paste from clilpboard
-	nnoremap <leader>p :r !xsel -bp<cr>
+"Add semicolon to the end of the line
+nnoremap <leader>; meA;<Esc>`e
 
-	" Wrap text to split
-	nnoremap <leader>wr :set wrap linebreak nolist
-	" Insert Mode Completion {{{
+" Paste from clilpboard
+nnoremap <leader>p :r !xsel -bp<cr>
 
-	inoremap <c-f> <c-x><c-f>
-	inoremap <c-]> <c-x><c-]>
-	inoremap <c-l> <c-x><c-l>
+" Wrap text to split
+nnoremap <leader>wr :set wrap linebreak nolist
+" Insert Mode Completion {{{
 
-	" }}}
-	"}}}
+inoremap <c-f> <c-x><c-f>
+inoremap <c-]> <c-x><c-]>
+inoremap <c-l> <c-x><c-l>
+
+" }}}
+"}}}
 "}}}
 " Abbreviations {{{
-	iabbrev ldis ಠ_ಠ
+iabbrev ldis ಠ_ಠ
 "}}}
 " Formatting {{{
 "Settings for LinuxFormatting"
@@ -318,101 +318,101 @@ let g:linuxsty_patterns = [ "/linux/", "/Linux/", "/kernel/", "/Kernel/" ]
 "}}}
 " Environment {{{
 if &diff
-    colorscheme skittles_berry
+	colorscheme skittles_berry
 endif
 "}}}
 " Plugins {{{
-	" Ctags {{{
-	"Highlight structs on file save using easy-tags
-	:let g:easytags_events = ['BufWritePost']
-	:set tags=./.tags
-	:let g:easytags_dynamic_files = 2
+" Ctags {{{
+"Highlight structs on file save using easy-tags
+:let g:easytags_events = ['BufWritePost']
+:set tags=./.tags
+:let g:easytags_dynamic_files = 2
 
-	"Setings for ctags"
-	map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-	"}}}
-	" fzf.vim {{{
-	nnoremap <silent> <C-p> :Files<CR>
-	nnoremap <silent> <C-o> :Lines<CR>
-	"}}}
-	" Jedi-vim {{{
-	" open definitions in tabs
-	let g:jedi#use_splits_not_buffers = "bottom"
+"Setings for ctags"
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"}}}
+" fzf.vim {{{
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-o> :Lines<CR>
+"}}}
+" Jedi-vim {{{
+" open definitions in tabs
+let g:jedi#use_splits_not_buffers = "bottom"
 
-	" disables the scratch window at the top of the screen
-	autocmd FileType python setlocal completeopt-=preview
-	"}}}
-	" NERDTree {{{
-	nnoremap <silent> <leader>nn :NERDTree<cr>
-	nnoremap <silent> <leader>nm :NERDTreeMirror<cr>
-	"}}}
-	" SuperTab {{{
+" disables the scratch window at the top of the screen
+autocmd FileType python setlocal completeopt-=preview
+"}}}
+" NERDTree {{{
+nnoremap <silent> <leader>nn :NERDTree<cr>
+nnoremap <silent> <leader>nm :NERDTreeMirror<cr>
+"}}}
+" SuperTab {{{
 
-	"let g:SuperTabDefaultCompletionType = "<c-n>"
-	let g:SuperTabDefaultCompletionType = "<c-x><c-o>" "Call omnicomplete
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>" "Call omnicomplete
 
-	"}}}
-	" Tlist {{{
-	"Settings for taglist"
-	nnoremap <silent> <leader>tt :Tlist<CR>
-	"}}}
-	" Vim-airline {{{
-	let g:airline_powerline_fonts = 1
-	let g:airline_theme = "jellybeans"
-	"}}}
-	" Vim-Clang {{{
-	
-	let g:clang_c_options = '-std=gnu11'
-	let g:clang_cpp_options = '-std=c++14'
-	
-	"}}}
-	" Vim-Dutyl {{{
+"}}}
+" Tlist {{{
+"Settings for taglist"
+nnoremap <silent> <leader>tt :Tlist<CR>
+"}}}
+" Vim-airline {{{
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "jellybeans"
+"}}}
+" Vim-Clang {{{
 
-	let g:dutyl_stdImportPaths=['/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/phobos', '/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/druntime/import']
+let g:clang_c_options = '-std=gnu11'
+let g:clang_cpp_options = '-std=c++14'
 
-	"}}}
-	" Vim-Easy-Align {{{
+"}}}
+" Vim-Dutyl {{{
 
-	nmap ga <Plug>(EasyAlign)
-	xmap ga <Plug>(EasyAlign)
+let g:dutyl_stdImportPaths=['/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/phobos', '/home/kenneth/Documents/dlang/install/dmd-2.080.1/src/druntime/import']
 
-	"}}}
-	" Vim-headerguard {{{
-	nnoremap <silent> <leader>h :HeaderguardAdd<CR>
-	"}}}
-	" Vim-multiple-cursors {{{
+"}}}
+" Vim-Easy-Align {{{
 
-	let g:multi_cursor_use_default_mapping=0
-	let g:multi_cursor_next_key='<C-m>'
-	let g:multi_cursor_quit_key='<Esc>'
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
-	"}}}
-	" Vim-Notes {{{
-	let g:notes_directories = ['~/Dropbox/Notes']
-	"}}}
-	" YouCompleteMe {{{
-	let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-	"}}}
+"}}}
+" Vim-headerguard {{{
+nnoremap <silent> <leader>h :HeaderguardAdd<CR>
+"}}}
+" Vim-multiple-cursors {{{
+
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_quit_key='<Esc>'
+
+"}}}
+" Vim-Notes {{{
+let g:notes_directories = ['~/Dropbox/Notes']
+"}}}
+" YouCompleteMe {{{
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"}}}
 "}}}
 " Mini-plugins {{{
 "Settings to move splits"
 function! MarkWindowSwap()
-    let g:markedWinNum = winnr()
+	let g:markedWinNum = winnr()
 endfunction
 
 function! DoWindowSwap()
-    "Mark destination
-    let curNum = winnr()
-    let curBuf = bufnr( "%" )
-    exe g:markedWinNum . "wincmd w"
-    "Switch to source and shuffle dest->source
-    let markedBuf = bufnr( "%" )
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' curBuf
-    "Switch to dest and shuffle source->dest
-    exe curNum . "wincmd w"
-    "Hide and open so that we aren't prompted and keep history
-    exe 'hide buf' markedBuf 
+	"Mark destination
+	let curNum = winnr()
+	let curBuf = bufnr( "%" )
+	exe g:markedWinNum . "wincmd w"
+	"Switch to source and shuffle dest->source
+	let markedBuf = bufnr( "%" )
+	"Hide and open so that we aren't prompted and keep history
+	exe 'hide buf' curBuf
+	"Switch to dest and shuffle source->dest
+	exe curNum . "wincmd w"
+	"Hide and open so that we aren't prompted and keep history
+	exe 'hide buf' markedBuf
 endfunction
 
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>

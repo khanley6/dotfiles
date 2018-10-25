@@ -46,6 +46,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Valloric/YouCompleteMe'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'chrisbra/csv.vim'
 
 Plug 'metakirby5/codi.vim'
 
@@ -355,6 +356,7 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>" "Call omnicomplete
 "}}}
 " Tlist {{{
 "Settings for taglist"
+let Tlist_Use_Right_Window = 1
 nnoremap <silent> <leader>tt :Tlist<CR>
 "}}}
 " Vim-airline {{{

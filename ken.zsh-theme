@@ -55,7 +55,7 @@ subsh() {
 }
 
 prompt_context() {
-	echo -n "${PR_RESET}${PR_GREEN}$USER@%m:${PR_RESET}${PR_CYAN}%~${PR_RESET}"
+	echo -n "${PR_RESET}${PR_GREEN}$USER@%m$(jobscount)$(subsh):${PR_RESET}${PR_CYAN}%~${PR_RESET}"
 }
 
 set_prompt() {

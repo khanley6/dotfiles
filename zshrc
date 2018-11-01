@@ -217,3 +217,4 @@ export PATH=$PATH:/home/kenneth/Documents/julia/julia-1.0.0/bin
 #}}}
 #}}}
 
+unsetopt share_history

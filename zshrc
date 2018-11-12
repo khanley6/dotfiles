@@ -155,6 +155,11 @@ mkcd() {
     cd "$1"
 }
 
+cdr() {
+  cd "$(realpath $1)"
+}
+compdef _files cdr
+
 cvim() {
 	cp "$1" "$2"
 	vim "$2"

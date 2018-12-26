@@ -1,0 +1,13 @@
+[user]
+	email = kennethhanley@gmail.com
+	name = Kenneth Hanley
+
+[core]
+	excludesfile = ~/.gitignore
+
+[alias]
+    cm = commit -m
+    st = status
+
+[push]
+    default = current

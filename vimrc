@@ -50,6 +50,10 @@ Plug 'chrisbra/csv.vim'
 
 Plug 'metakirby5/codi.vim'
 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+
 call plug#end()
 "}}}
 " Basic Options {{{
@@ -358,6 +362,13 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>" "Call omnicomplete
 "Settings for taglist"
 let Tlist_Use_Right_Window = 1
 nnoremap <silent> <leader>tt :Tlist<CR>
+"}}}
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "}}}
 " Vim-airline {{{
 let g:airline_theme = "jellybeans"

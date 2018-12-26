@@ -36,6 +36,7 @@ Plug 'tpope/vim-surround'
 Plug 'xolox/vim-notes'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'chrisbra/csv.vim'
 
 Plug 'mhinz/vim-startify'
 " sudo apt-get install fonts-powerline
@@ -49,6 +50,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
 
 Plug 'metakirby5/codi.vim'
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+
 
 call plug#end()
 "}}}
@@ -359,6 +365,13 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>" "Call omnicomplete
 let Tlist_Use_Right_Window = 1
 nnoremap <silent> <leader>tt :Tlist<CR>
 "}}}
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"}}}
 " Vim-airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "jellybeans"
@@ -379,6 +392,9 @@ let g:dutyl_stdImportPaths=['/home/kenneth/Documents/dlang/install/dmd-2.080.1/s
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+"}}}
+" Vim-go {{{
+let g:go_version_warning = 0
 "}}}
 " Vim-headerguard {{{
 nnoremap <silent> <leader>h :HeaderguardAdd<CR>

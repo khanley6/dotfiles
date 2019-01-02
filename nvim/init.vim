@@ -422,6 +422,7 @@ let g:ycm_extra_conf_vim_data = [
 let g:ycm_global_ycm_extra_conf = '~/.global_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
+let g:ycm_goto_buffer_command = 'split'
 nnoremap <Leader>] :YcmCompleter GoTo<CR>
 nnoremap <Leader>[ :YcmCompleter GetType<CR>
 "}}}

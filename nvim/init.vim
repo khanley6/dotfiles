@@ -82,6 +82,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0
 " Change default split placement
 set splitbelow
+set matchpairs+=<:>
 " Wildmenu {{{
 set wildmenu
 set wildignore+=.git 								"Version control

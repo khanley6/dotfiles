@@ -82,6 +82,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0
 " Change default split placement
 set splitbelow
+set matchpairs+=<:>
 " Wildmenu {{{
 set wildmenu
 set wildignore+=.git 								"Version control
@@ -108,7 +109,7 @@ augroup END
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"set expandtab
+set expandtab
 "set wrap
 "set textwidth=80
 "set formatoptions=qrn1j

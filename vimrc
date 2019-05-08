@@ -7,51 +7,59 @@
 " Vim-plug {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/csv.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'davinche/godown-vim'
+Plug 'drmikehenry/vim-headerguard'
+Plug 'edkolev/tmuxline.vim'
+"Plug 'ervandew/supertab'
+"Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'godlygeek/tabular'
+Plug 'heavenshell/vim-pydocstring'
+Plug 'honza/vim-snippets'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/vim-journal'
-Plug 'davinche/godown-vim'
-Plug 'davidhalter/jedi-vim'
-Plug 'vivien/vim-linux-coding-style'
+Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'vim-scripts/taglist.vim'
-Plug 'jplaut/vim-arduino-ino'
-"Plug 'justmao945/vim-clang'
-Plug 'altercation/vim-colors-solarized'
-Plug 'idanarye/vim-dutyl'
-Plug 'junegunn/vim-easy-align'
-Plug 'xolox/vim-easytags'
-Plug 'fatih/vim-go'
-Plug 'drmikehenry/vim-headerguard'
-Plug 'xolox/vim-misc'
+Plug 'SirVer/ultisnips'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'lervag/vimtex'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'xolox/vim-notes'
-Plug 'heavenshell/vim-pydocstring'
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'mhinz/vim-startify'
+Plug 'udalov/kotlin-vim'
 " sudo apt-get install fonts-powerline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+"Plug 'vim-scripts/taglist.vim'
+Plug 'vivien/vim-linux-coding-style'
+Plug 'xolox/vim-misc'
+"Plug 'junegunn/vim-journal'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'jplaut/vim-arduino-ino'
+"Plug 'justmao945/vim-clang'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'idanarye/vim-dutyl'
+"Plug 'xolox/vim-easytags'
+"Plug 'lervag/vimtex'
+"Plug 'xolox/vim-notes'
+
 " sudo apt-get install build-essential python-dev cmake
-Plug 'Valloric/YouCompleteMe'
-Plug 'edkolev/tmuxline.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'chrisbra/csv.vim'
-
-Plug 'metakirby5/codi.vim'
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
 
 
 call plug#end()
@@ -212,26 +220,26 @@ set foldtext=MyFoldText()
 " Filetypes {{{
 " Arduino {{{
 autocmd BufRead,BufNewFile *.pde,*.ino set filetype=arduino
-au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
+"au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
 "}}}
 " Assembly {{{
 au BufNewFile,BufRead *.asm set filetype=nasm
 "}}}
 " C {{{
 au BufNewFile,BufRead *.i set filetype=c
-au BufNewFile *.c 0r ~/.vim/skel/c.skel
+"au BufNewFile *.c 0r ~/.vim/skel/c.skel
 
 autocmd filetype c map <leader>d :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 "}}}
 " C++ {{{
 au BufNewFile,BufRead *.h++ set filetype=cpp
-au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
-au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
+"au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
+"au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
 
 au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
 "}}}
 " D {{{
-au BufNewFile *.d 0r ~/.vim/skel/d.skel
+"au BufNewFile *.d 0r ~/.vim/skel/d.skel
 
 " This is probably a mistake... But it works to open function definition in a split
 autocmd filetype d map <leader>d : DUsjump<CR>
@@ -391,6 +399,9 @@ let g:dutyl_stdImportPaths=['/home/kenneth/Documents/dlang/install/dmd-2.080.1/s
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+"}}}
+" Vim-Go {{{
+let g:go_def_mode='gopls'
 "}}}
 " Vim-headerguard {{{
 nnoremap <silent> <leader>h :HeaderguardAdd<CR>

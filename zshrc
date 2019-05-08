@@ -68,6 +68,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR='vim'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -102,7 +103,6 @@ source $ZSH/oh-my-zsh.sh
 alias cpu-temp='sensors | grep Core'
 alias fuck='sudo $(history -p \!\!)'
 alias local-server='python -m SimpleHTTPServer'
-alias nnautilus='nautilus --no-desktop &'
 alias yor='rlwrap -c ~/Documents/phd/relocate/bin/yorick'
 alias py='python3'
 alias sl='ls'
@@ -111,6 +111,8 @@ alias cd..='cd ..'
 
 alias connectCollegeVPN='nmcli con up id College'
 alias disconnectCollegeVPN='nmcli con down id College'
+alias connectWorkVPN='nmcli con up id Work'
+alias disconnectWorkVPN='nmcli con down id Work'
 
 alias pingg='ping 8.8.8.8'
 alias wifiOn='rfkill unblock wifi'
@@ -185,6 +187,7 @@ codi() {
 }
 #}}}
 # Path {{{
+export PATH=/home/kenneth/bin:/home/kenneth/.local/bin:$PATH
 # Intel compilers
 #source /opt/intel/composer_xe_2015/bin/compilervars.sh intel64
 #source /opt/intel/parallel_studio_xe_2016.3.067/psxevars.sh intel64 > /dev/null
@@ -193,7 +196,6 @@ codi() {
 #export PATH=/usr/local/go/bin:$PATH
 export GOPATH=/home/kenneth/Documents/go
 export PATH=$PATH:$GOPATH/bin
-#export PATH=$PATH:/home/kenneth/bin
 
 # Google appengine
 #export PATH=$PATH:/home/kenneth/Documents/AppEngine/go_appengine
@@ -210,17 +212,45 @@ export PATH=$PATH:$GOPATH/bin
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 
 # Jupyter
-export PATH=$PATH:~/.local/bin
+export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
 
 # Julia
-export PATH=$PATH:/home/kenneth/Documents/julia/julia-1.0.0/bin
+#export PATH=$PATH:/home/kenneth/Documents/julia/julia-1.0.0/bin
 #}}}
+
+# Cling
+#export PATH=$PATH:/home/kenneth/Documents/c++/cling/cling_2019-01-23_ubuntu18/bin
+
 # Source Scripts {{{
 # FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 #. /home/kenneth/torch/install/bin/torch-activate
 #}}}
 #}}}
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 unsetopt share_history
+stty -ixon
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/kenneth/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/kenneth/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kenneth/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/kenneth/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

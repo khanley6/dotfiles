@@ -48,9 +48,22 @@ Plug 'xolox/vim-notes'
 Plug 'Shougo/neoinclude.vim'
 Plug 'jsfaint/coc-neoinclude'
 
-" sudo apt-get install build-essential python-dev cmake
-"Plug 'Valloric/YouCompleteMe'
+" Needs a few things:
+" nodejs and yarn
+" - curl -sL install-node.now.sh/lts | sh
+" - curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+" need ccls for c-family completion
+" - https://github.com/MaskRay/ccls
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': ['./install.sh', { -> coc#util#install()}] }
+" Install desired extensions with `:CocInstall ____`
+" - coc-ccls  <- Don't forget to update CocConfig
+" - coc-go
+" - coc-json
+" - coc-lists
+" - coc-python
+" - coc-snippets
+" - coc-ultisnips
+" - coc-vimtex
 
 
 call plug#end()

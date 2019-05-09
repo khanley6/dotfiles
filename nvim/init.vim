@@ -15,7 +15,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'edkolev/tmuxline.vim'
 "Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'honza/vim-snippets'
@@ -54,7 +54,8 @@ Plug 'jsfaint/coc-neoinclude'
 " - curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 " need ccls for c-family completion
 " - https://github.com/MaskRay/ccls
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': ['./install.sh', { -> coc#util#install()}] }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh' }
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': ['./install.sh', { -> coc#util#install()}] }
 " Install desired extensions with `:CocInstall ____`
 " - coc-ccls  <- Don't forget to update CocConfig
 " - coc-go
@@ -485,17 +486,17 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-"inoremap <silent><expr> <TAB>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<TAB>" :
-"      \ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -503,6 +504,7 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_prev = '<S-tab>'
 
 
 " Use <c-space> to trigger completion.
@@ -511,6 +513,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"To make <CR> auto-select the first completion item and notify coc.nvim to
+"format on enter, use: >
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -567,20 +573,6 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 
-" Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
-
-
-
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -598,4 +590,21 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" vim-airline
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+" create a part for server status.
+function! GetServerStatus()
+  return get(g:, 'coc_status', '')
+endfunction
+call airline#parts#define_function('coc', 'GetServerStatus')
+function! AirlineInit()
+  let g:airline_section_a = airline#section#create(['coc'])
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
+
+" exclude overwrite statusline of list filetype
+let g:airline_exclude_filetypes = ["list"]
 "}}}

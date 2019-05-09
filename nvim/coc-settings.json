@@ -11,6 +11,10 @@
            "directory": ".ccls-cache"
          }
        }
+    },
+    "serve-d": {
+        "command": "serve-d",
+        "filetypes": ["d"]
     }
   }
 }

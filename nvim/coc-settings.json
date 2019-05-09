@@ -1,5 +1,6 @@
 {
   "coc.preferences.jumpCommand": "split",
+  "suggest.noselect": false,
   "languageserver": {
     "ccls": {
       "command": "ccls",

@@ -9,6 +9,9 @@
       "initializationOptions": {
          "cache": {
            "directory": ".ccls-cache"
+         },
+         "clang": {
+            "extraArgs": ["-std=c++17"]
          }
        }
     },
@@ -16,5 +19,6 @@
         "command": "serve-d",
         "filetypes": ["d"]
     }
-  }
+  },
+  "rust-client.channel": "stable"
 }

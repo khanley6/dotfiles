@@ -1,6 +1,8 @@
 {
   "coc.preferences.jumpCommand": "split",
   "suggest.noselect": false,
+  "suggest.snippetIndicator": "★",
+  "suggest.echodocSupport": true,
   "languageserver": {
     "ccls": {
       "command": "ccls",

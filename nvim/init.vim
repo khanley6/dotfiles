@@ -30,6 +30,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/vim-journal'
 Plug 'lervag/vimtex'
+Plug 'liuchengxu/vista.vim' "Testing
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -153,6 +154,8 @@ endif
 " Search and Movement {{{
 set scrolloff=5
 
+" Press F4 to toggle highlighting on/off, and show current value.
+noremap <F4> :set hlsearch! hlsearch?<CR>
 
 " Jumping to tags.
 "
@@ -226,26 +229,26 @@ set foldtext=MyFoldText()
 " Filetypes {{{
 " Arduino {{{
 autocmd BufRead,BufNewFile *.pde,*.ino set filetype=arduino
-au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
+"au BufNewFile *.ino,*.pde 0r ~/.vim/skel/arduino.skel
 "}}}
 " Assembly {{{
 au BufNewFile,BufRead *.asm set filetype=nasm
 "}}}
 " C {{{
 au BufNewFile,BufRead *.i set filetype=c
-au BufNewFile *.c 0r ~/.vim/skel/c.skel
+"au BufNewFile *.c 0r ~/.vim/skel/c.skel
 
 autocmd filetype c map <leader>d :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 "}}}
 " C++ {{{
 au BufNewFile,BufRead *.h++ set filetype=cpp
-au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
-au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
+"au BufNewFile *.cpp 0r ~/.vim/skel/cpp.skel
+"au BufNewFile *.cc 0r ~/.vim/skel/cpp.skel
 
 au BufRead * if search('\M-*- C++ -*-', 'n', 1) | setlocal ft=cpp | endif
 "}}}
 " D {{{
-au BufNewFile *.d 0r ~/.vim/skel/d.skel
+"au BufNewFile *.d 0r ~/.vim/skel/d.skel
 
 " This is probably a mistake... But it works to open function definition in a split
 autocmd filetype d map <leader>d : DUsjump<CR>
@@ -391,6 +394,7 @@ let g:UltiSnipsEditSplit="vertical"
 " Vim-airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "jellybeans"
+"let g:airline#extensions#tabline#enabled = 1
 "}}}
 " Vim-Clang {{{
 
@@ -424,6 +428,28 @@ let g:multi_cursor_quit_key='<Esc>'
 "}}}
 " Vim-Notes {{{
 let g:notes_directories = ['~/Dropbox/Notes']
+"}}}
+" Vista {{{
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+"set statusline+=%{NearestMethodOrFunction()}
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc 
+"autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+"let g:vista_fzf_preview = ['right:50%']
+
+let g:vista_executive_for = {
+  \ 'cpp': 'coc',
+  \}
+
+nnoremap <silent> <leader>tl :Vista!!<cr>
+
 "}}}
 " YouCompleteMe {{{
 let g:ycm_autoclose_preview_window_after_completion=1

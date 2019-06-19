@@ -68,7 +68,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim'
+export EDITOR='nvim'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,7 +104,7 @@ alias cpu-temp='sensors | grep Core'
 alias fuck='sudo $(history -p \!\!)'
 alias local-server='python -m SimpleHTTPServer'
 alias yor='rlwrap -c ~/Documents/phd/relocate/bin/yorick'
-alias py='python3'
+alias py='python3 -i <(echo "import numpy as np")'
 alias sl='ls'
 alias rr='ranger'
 alias cd..='cd ..'

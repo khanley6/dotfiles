@@ -17,6 +17,15 @@
          }
        }
     },
+    "golang": {
+      "command": "go-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
     "serve-d": {
         "command": "serve-d",
         "filetypes": ["d"]

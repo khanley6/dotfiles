@@ -5,7 +5,7 @@ sudo apt install -y vim tmux ranger zsh wget curl cmake fonts-powerline silverse
 
 # Switch to zsh and ohmyzsh
 chsh -s $(which zsh)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 cp themes/zsh/ken.zsh-theme $HOME/.oh-my-zsh/themes/
 
 # Copy config files
@@ -26,4 +26,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Set up tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm¬
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

@@ -1,35 +1,29 @@
 #!/bin/bash
-############################
-# .make.sh
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
-############################
 
-########## Variables
+# Install general tools
+sudo apt install -y vim tmux ranger zsh wget curl cmake fonts-powerline silversearcher-ag
 
-dir=~/dotfiles                    # dotfiles directory
-files="bashrc vimrc tmux.conf"    # list of files/folders to symlink in homedir
+# Switch to zsh and ohmyzsh
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp themes/zsh/ken.zsh-theme $HOME/.oh-my-zsh/themes/
 
-##########
-
-# create dotfiles_old in homedir
-
-# change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir
-echo "...done"
-
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
-for file in $files; do
-    #echo "Moving any existing dotfiles from ~ to $olddir"
-    #mv ~/.$file ~/dotfiles_old/
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+# Copy config files
+for file in $(ls configs); do
+    cp configs/$file $HOME/.$file
 done
 
+# Copy utility scripts into the path
+mkdir -p $HOME/bin
+cp -r scripts/* $HOME/bin
 
-# zsh Notes
-### Install ###
-# sudo apt install zsh
-# chsh -s $(which zsh)
-# wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-## Update fzf maybe?
+# Get Vim set up
+if [ ! -d "$HOME/.vim/colors" ]; then
+    mkdir -p $HOME/.vim/colors
+fi
+cp -r themes/vim/colors/* $HOME/.vim/colors/
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Set up tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm¬

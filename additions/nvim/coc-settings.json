@@ -1,0 +1,35 @@
+{
+  "coc.preferences.jumpCommand": "split",
+  "suggest.noselect": false,
+  "suggest.snippetIndicator": "★",
+  "suggest.echodocSupport": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": ".ccls-cache"
+         },
+         "clang": {
+            "extraArgs": ["-std=c++17"]
+         }
+       }
+    },
+    "golang": {
+      "command": "go-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
+    "serve-d": {
+        "command": "serve-d",
+        "filetypes": ["d"]
+    }
+  },
+  "rust-client.channel": "stable"
+}
